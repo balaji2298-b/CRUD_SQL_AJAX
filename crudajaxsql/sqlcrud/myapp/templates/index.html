@@ -1,0 +1,54 @@
+{% extends 'base.html' %}
+{% block body %}
+<form  class="form-inline">
+    {% csrf_token %}
+    <div class="mb-3">
+        <label>Name:</label>
+        <input type="text" id="name"  class="form-control" style="width:30%;" required="required"/>
+    </div>
+    <div class="mb-3">
+        <label>Mobilenumber:</label>
+        <input type="text" id="mobilenumber"  pattern="[0-9]{10}"class="form-control" style="width:30%;" required="required"/>
+    </div>
+    <div class="mb-3">
+        <label>Age:</label>
+        <input type="text" id="age" class="form-control" style="width:30%;" required="required"/>
+    </div>
+     <div class="mb-3">
+        <label>City:</label>
+        <input type="text" id="city" class="form-control" style="width:30%;" required="required"/>
+    </div>
+    <div class="mb-3">
+        <button type="button" id="success" class="btn btn-primary">Create</button>
+    </div>
+</form>
+<br/>
+<table class="table table-bordered">
+    <thead class="alert-success">
+        <tr>
+            <th>Name</th>
+            <th>MOBILENUMBER</th>
+            <th>AGE</th>
+            <th>CITY</th>
+            <th>Action</th>
+        </tr>
+    </thead>
+    <tbody>
+        {% for batmen in batmens %}
+        <tr>
+            <td>{{ batmen.name }}</td>
+            <td>{{ batmen.mobilenumber }}</td>
+            <td>{{ batmen.age}}</td>
+            <td>{{ batmen.city}}</td>
+            
+            <td><center>
+                <a  class="btn btn-warning edit" name={{batmen.id}} >Edit</a>
+                <a href="{% url 'delete' id=batmen.id %}"class="btn btn-danger delete" name={{batmen.id}}>Delete</a>
+            </center>
+            </td>
+        </tr>
+        {% endfor %}
+    </tbody>
+</table>
+
+{% endblock %}
